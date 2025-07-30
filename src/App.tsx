@@ -4,11 +4,13 @@ import type { Image } from "./types/Image";
 import Player from "./components/Player";
 import { SOUNDCLOUD_EMBED } from "./constants";
 import Loading from "./components/Loading";
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isVideoVisible, setIsVideoVisible] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -58,6 +60,60 @@ function App() {
           ></div>
         </div>
       </div>
+
+      <AnimatePresence mode="wait">
+        {isVideoVisible && (
+          <motion.div
+            key="propulsor-youtube-embed"
+            className="pointer-events-none fixed z-[100] flex aspect-video h-screen w-full items-center justify-center px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <div className="aspect-video w-full rounded bg-black md:w-3/5">
+              <iframe
+                width="100%"
+                className="pointer-events-auto rounded"
+                height="100%"
+                src="https://www.youtube.com/embed/flh0wGaj4jM?si=bkwHWlLnAjUQ2u9W"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen={true}
+              ></iframe>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="fixed top-2 left-4 mb-4 flex flex-col items-start gap-2 px-4 text-xl text-[#fff] sm:px-0">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsVideoVisible(isVideoVisible ? false : true)}
+            className="cursor-pointer sm:hover:bg-[#f00]"
+          >
+            {isVideoVisible ? "(X) " : "(O) "}
+            PROPULSOR
+          </button>
+          {!isVideoVisible && (
+            <motion.div
+              className=""
+              animate={{ x: [0, 5, 0] }}
+              transition={{
+                duration: 0.5,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut",
+              }}
+            >
+              &lt;--
+            </motion.div>
+          )}
+        </div>
+
+      </div>
+
       <Player embed={SOUNDCLOUD_EMBED} />
     </>
   );
