@@ -5,12 +5,14 @@ import Player from "./components/Player";
 import { SOUNDCLOUD_EMBED } from "./constants";
 import Loading from "./components/Loading";
 import { AnimatePresence, motion } from "framer-motion";
+import Credits from "./components/Credits";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVideoVisible, setIsVideoVisible] = useState(true);
+  const [creditsOpen, setCreditsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -112,12 +114,12 @@ function App() {
           )}
         </div>
 
-        {/* <button */}
-        {/*   onClick={() => setCreditsOpen(!creditsOpen)} */}
-        {/*   className="z-[200] pb-1 leading-none sm:hover:bg-[#f00]" */}
-        {/* > */}
-        {/*   (?) */}
-        {/* </button> */}
+        <button
+          onClick={() => setCreditsOpen(!creditsOpen)}
+          className="z-[200] pb-1 leading-none sm:hover:bg-[#f00]"
+        >
+          (?)
+        </button>
 
         <ul className="fixed top-4 right-4 flex rotate-180 gap-4 text-xs uppercase [writing-mode:vertical-lr]">
           <li className="-ml-1 pl-1 leading-none sm:hover:bg-[#f00]">
@@ -153,6 +155,24 @@ function App() {
       </div>
 
       <Player embed={SOUNDCLOUD_EMBED} />
+
+      <AnimatePresence mode="wait">
+        {creditsOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            key="credits"
+          >
+            <Credits
+              closeCredits={() => {
+                setCreditsOpen(false);
+              }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
