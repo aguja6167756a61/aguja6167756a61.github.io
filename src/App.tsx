@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getImages } from "./sanity/sanity-utils";
 import type { Image } from "./types/Image";
+import Player from "./components/Player";
+import { SOUNDCLOUD_EMBED } from "./constants";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
@@ -55,6 +57,7 @@ function App() {
           ></div>
         </div>
       </div>
+      <Player embed={SOUNDCLOUD_EMBED} />
     </>
   );
 }
