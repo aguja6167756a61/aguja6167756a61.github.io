@@ -6,6 +6,7 @@ import { SOUNDCLOUD_EMBED } from "./constants";
 import Loading from "./components/Loading";
 import { AnimatePresence, motion } from "framer-motion";
 import Credits from "./components/Credits";
+import Cursor from "./components/Cursor";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
@@ -173,6 +174,8 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Cursor />
     </>
   );
 }
