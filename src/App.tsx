@@ -3,6 +3,7 @@ import { getImages } from "./sanity/sanity-utils";
 import type { Image } from "./types/Image";
 import Player from "./components/Player";
 import { SOUNDCLOUD_EMBED } from "./constants";
+import Loading from "./components/Loading";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
@@ -28,7 +29,7 @@ function App() {
     setMousePosition(newPosition);
   };
 
-  if (isLoading) return <div>...</div>;
+  if (isLoading) return <Loading />;
 
   return (
     <>
