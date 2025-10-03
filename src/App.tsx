@@ -12,7 +12,7 @@ function App() {
   const [images, setImages] = useState<Image[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isVideoVisible, setIsVideoVisible] = useState(true);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [creditsOpen, setCreditsOpen] = useState(false);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ function App() {
       <Player embed={SOUNDCLOUD_EMBED} />
 
       <AnimatePresence mode="wait">
-        {creditsOpen && (
+        {creditsOpen ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -171,6 +171,15 @@ function App() {
                 setCreditsOpen(false);
               }}
             />
+          </motion.div>
+        ) : (
+          <motion.div
+            className="pointer-events-none flex h-screen items-center justify-center mix-blend-difference invert"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <img src="logo.webp" className="pointer-events-none w-[500px]" />
           </motion.div>
         )}
       </AnimatePresence>
