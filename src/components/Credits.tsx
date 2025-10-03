@@ -31,7 +31,7 @@ export default function Credits({ closeCredits }: CreditsProps) {
             <span className="justify-self-end text-[0.6rem]">Web</span>
             <a
               className="justify-self-start text-xs sm:hover:bg-white sm:hover:text-black"
-              href="https://i10-studio.github.io"
+              href="https://i10.dev"
               target="_blank"
             >
               INSTRUMENTO
