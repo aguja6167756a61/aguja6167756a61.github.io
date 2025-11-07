@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Credits from "./components/Credits";
 import Cursor from "./components/Cursor";
 import Links from "./components/Links";
+import Fechas from "./components/Fechas";
 
 function App() {
   const [images, setImages] = useState<Image[] | null>(null);
@@ -123,6 +124,7 @@ function App() {
           (?)
         </button>
         <Links />
+        <Fechas />
       </div>
 
       <Player embed={SOUNDCLOUD_EMBED} />
