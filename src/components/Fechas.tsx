@@ -5,7 +5,7 @@ import type { Fecha } from "../types/Fecha";
 export default function Fechas() {
   const [fechas, setFechas] = useState<Fecha[] | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(false);
+  //   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     getFechas()
@@ -22,11 +22,11 @@ export default function Fechas() {
     })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-  const pastShows = fechas?.filter((agujaDate) => {
-    const date = new Date(agujaDate.date).toISOString().split("T")[0];
-    const today = new Date().toISOString().split("T")[0];
-    return today > date;
-  });
+  //   const pastShows = fechas?.filter((agujaDate) => {
+  //     const date = new Date(agujaDate.date).toISOString().split("T")[0];
+  //     const today = new Date().toISOString().split("T")[0];
+  //     return today > date;
+  //   });
 
   if (loading) return <div> ... </div>;
 
@@ -45,16 +45,15 @@ export default function Fechas() {
       {/* <button onClick={() => setIsExpanded(!isExpanded)} className="text-sm">
         {isExpanded ? "---" : "+++"}
       </button> */}
-      {isExpanded && pastShows && (
+      {/* {isExpanded && pastShows && (
         <>
-          {/* <h1 className="my-1 text-base font-bold">pasado:</h1> */}
           <ul className="over text-sm">
             {pastShows.map((agujaDate) => {
               return <DateListItem key={agujaDate._id} fecha={agujaDate} />;
             })}
           </ul>
         </>
-      )}
+      )} */}
     </div>
   );
 }
