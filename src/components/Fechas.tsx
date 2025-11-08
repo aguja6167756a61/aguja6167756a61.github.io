@@ -61,7 +61,7 @@ export default function Fechas() {
 function DateListItem({ fecha }: { fecha: Fecha }) {
   return (
     <li className="mb-4 flex flex-col gap-1 text-base sm:items-center md:mb-0 md:flex-row">
-      <div>{new Date(fecha.date).toLocaleDateString("es-ES")}</div>
+      <div>{fecha.date}</div>
       {fecha.name && <div className="font-serif italic">{fecha.name}</div>}
       {fecha.place && <div className="">@{fecha.place}</div>}
       {fecha.link && (
